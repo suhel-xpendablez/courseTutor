@@ -1,0 +1,120 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title></title>
+      <style>
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+div.panel1 {
+    padding: 0 18px;
+    display: block;
+    background-color: white;
+}
+div.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+}
+
+/*div.panel.show {
+    display: block;
+}*/
+</style>
+    </head>
+    <body>
+      <!-- <div id="mainDiv" style="margin-top:25px;">
+        <div id="titleList" style="border:1px solid #000;width:25%;float:left">
+         <div id="titleListName">
+           <ul>
+             <li>Ch1</li>
+             <li>Ch2</li>
+           </ul>
+
+         </div>
+        </div>
+        </div>
+
+      </div> -->
+      <div id="mainDiv">
+      </div>
+    </body>
+    <!-- <script src="course.json" ></script>
+    <script src="course.js" ></script> -->
+    <script>
+
+    var chapters = [{
+            id:123,
+            chapterName:'section 1',
+            subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      },
+      {
+          id:122,
+          chapterName:'section 2',
+          subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+            id:121,
+            chapterName:'section 3',
+            subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+          },
+          {
+              id:112,
+              chapterName:'section 4',
+              subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+            }
+    ]
+
+
+
+    var getAllContent = function(){
+      return chapters;
+    }
+    getAllContent();
+
+    var contentView = function(){
+      var divEle = document.getElementById('mainDiv');
+      // console.log(divEle);
+      var content = getAllContent();
+      console.log(content);
+      for(var i=0; i<content.length; i++){
+        var buttonEle = document.createElement('button');
+        buttonEle.setAttribute("class", "accordion active");
+        buttonEle.textContent = content[i].chapterName;
+        buttonEle.addEventListener('click', (function(){
+          return function(){
+            // alert("Hello");
+            // var divElem1 = document.createElement('div');
+              var divElem1 = document.createElement('div');
+              divElem1.innerHTML =
+              // divElem1.style.display=block;
+              console.log(divElem1);
+              // divElem1.setAttribute("class", panel);
+              var spanElem = document.createElement('span');
+              console.log(spanElem);
+              spanElem.textContent = current.subTopic[j].stName;
+              divElem1.style.display='block';
+              divElem1.appendChild(spanElem);
+          }
+        }));
+        divEle.appendChild(buttonEle);
+      }
+    }
+    contentView();
+
+    </script>
+  </html>
