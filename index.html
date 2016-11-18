@@ -35,13 +35,26 @@ div.panel.show {
   <h2>Accordion</h2>
   <div id="mainDiv">
 
-  </div>
+  </div><br>
+  <button type="button" onClick="setPrevNext('prev')" id="prevBtn">Previous</button>
+  <button type="button" onClick="setPrevNext('next')" id="nextBtn">Next</button>
 
 </body>
 <script type="text/javascript">
-var model = [{name:'Section 1',content:'Lorem ipsum dolor sit amet'},{name:'Section 2',content:'Lorem ipsum dolor sit amet'},{name:'Section 3',content:'Lorem ipsum dolor sit amet'}];
+var model = [
+  {name:'Section 1',content:'Section 1 is open. Lorem ipsum dolor sit amet'},
+  {name:'Section 2',content:'Section 2 is open. Lorem ipsum dolor sit amet'},
+  {name:'Section 3',content:'Section 3 is open. Lorem ipsum dolor sit amet'},
+  {name:'Section 4',content:'Section 4 is open. Lorem ipsum dolor sit amet'},
+  {name:'Section 5',content:'Section 5 is open. Lorem ipsum dolor sit amet'}
+];
+
 var mainDiv = document.getElementById('mainDiv');
-//var acc = document.getElementsByClassName("accordion");
+var previousBtn = document.getElementById('prevBtn');
+var nextBtn = document.getElementById('nextBtn');
+var currentSection = 0;
+var count = currentSection || 0;
+
 function setAccordian(){
   for (var i = 0; i < model.length; i++) {
     var elem = document.createElement('button');
@@ -49,32 +62,96 @@ function setAccordian(){
     var div = document.createElement('div');
     var pTag = document.createElement('p');
     div.setAttribute("class", "panel");
-
     elem.innerHTML = model[i].name;
     pTag.innerHTML = model[i].content;
+
     div.append(pTag);
     mainDiv.append(elem);
     mainDiv.append(div);
+
+    if(i == (currentSection || 0)){
+      if(currentSection > 0){
+        div.style.display = 'block';
+        previousBtn.disabled = false;
+      }else {
+        div.style.display = 'block';
+        previousBtn.disabled = true;
+      }
+      count++;
+    }
+
     elem.addEventListener('click', (function(i){
       return function(){
-        var panel = document.getElementsByClassName("panel");
-        if(panel[i].style.display == 'block'){
-          panel[i].style.display = 'none';
+        if(i == 0){
+          console.log("i",i);
+          previousBtn.disabled = true;
+          nextBtn.disabled = false;
+          setToggleDiv(i);
+          currentSection = i;
+          count = i;
         }else {
-          panel[i].style.display = 'block';
-        }
+          console.log("i",i);
+          previousBtn.disabled = false;
+          nextBtn.disabled = false;
+          setToggleDiv(i);
+          currentSection = i;
+          count = i;
+         }
+
       }
     })(i));
   }
 }
 setAccordian();
 
+function setToggleDiv(i){
+  var panel = document.getElementsByClassName("panel");
+  for (var j = 0; j < model.length; j++) {
+    if(j == i){
+      if(panel[i].style.display == 'block'){
+        panel[i].style.display = 'none';
+      }else {
+        panel[i].style.display = 'block';
+      }
+    }else {
+      panel[j].style.display = 'none';
+    }
+  }
+  // if(panel[i].style.display == 'block'){
+  //   panel[i].style.display = 'none';
+  // }else {
+  //   panel[i].style.display = 'block';
+  // }
+}
+
+function setPrevNext(action){
+  var panel = document.getElementsByClassName("panel");
+  if(action == 'prev'){
+    console.log(count);
+    if(count == 1){
+      previousBtn.disabled = true;
+      panel[count-1].style.display = 'block';
+      panel[count].style.display = 'none';
+    }else {
+      count--;
+      nextBtn.disabled = false;
+      panel[count].style.display = 'none';
+      panel[count-1].style.display = 'block';
+    }
+
+  }else if(action == 'next'){
+    if(count == 0){
+      count++;
+    }
+    previousBtn.disabled = false;
+    panel[count].style.display = 'block';
+    panel[count-1].style.display = 'none';
+    count++;
+    if(count == model.length){
+      nextBtn.disabled = true;
+    }
+  }
+}
+
 </script>
 </html>
-<!-- var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function(){
-        this.classList.toggle("active");
-        this.nextElementSibling.classList.toggle("show"); -->
