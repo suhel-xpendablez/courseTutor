@@ -30,59 +30,45 @@
     display: none;
     background-color: white;
   }
-
-  /*div.panel.show {
-  display: block;
-  }*/
   </style>
 </head>
 <body>
-  <!-- <div id="mainDiv" style="margin-top:25px;">
-  <div id="titleList" style="border:1px solid #000;width:25%;float:left">
-  <div id="titleListName">
-  <ul>
-  <li>Ch1</li>
-  <li>Ch2</li>
-</ul>
-
-</div>
-</div>
-</div>
-
-</div> -->
 <div id="mainDiv">
 </div>
+</br>
+<button id="previous" onclick="prevFunction()">Prev</button>
+<button id="next" onclick="nextFunction()">Next</button>
 </body>
-<!-- <script src="course.json" ></script>
-<script src="course.js" ></script> -->
 <script>
 
 var chapters = [{
   id:123,
   chapterName:'section 1',
-  subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  subTopic: 'section 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 },
 {
   id:122,
   chapterName:'section 2',
-  subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  subTopic: 'section 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 },
 {
   id:121,
   chapterName:'section 3',
-  subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  subTopic: 'section 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 },
 {
   id:112,
   chapterName:'section 4',
-  subTopic: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  subTopic: 'section 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 }
 ]
 
 var model = chapters;
 var divEle = document.getElementById('mainDiv');
+var count = 0;
+var btnNext = document.getElementById('next');
+var btnPrev = document.getElementById('previous');
 var contentView = function(){
-  console.log(divEle);
   var content = chapters;
   for(var i=0; i<content.length; i++){
     var buttonEle = document.createElement('button');
@@ -92,15 +78,21 @@ var contentView = function(){
     divElem1.setAttribute("class", "panel");
     buttonEle.textContent = content[i].chapterName;
     spanElem.textContent = content[i].subTopic;
+    var btnPrev = document.getElementById('previous');
+    if(i==0){
+      divElem1.style.display='block';
+      btnPrev.disabled = true;
+      count++;
+    }
     buttonEle.addEventListener('click', (function(i){
       return function(){
         var toggle = document.getElementsByClassName("panel");
-        console.log(toggle);
         if(toggle[i].style.display == 'block'){
           toggle[i].style.display = 'none';
         }else {
           toggle[i].style.display = 'block';
         }
+        prevFunction();
       }
     })(i));
     divElem1.appendChild(spanElem);
@@ -109,6 +101,33 @@ var contentView = function(){
   }
 }
 contentView();
+function nextFunction(){
+  if(count == model.length){
+    btnNext.disabled = true;
+  }
+  else {
+    btnPrev.disabled = false;
+    var toggle = document.getElementsByClassName("panel");
+    toggle[count].style.display = 'block';
+    toggle[count-1].style.display = 'none';
+    count++;
+  }
+}
+function prevFunction(){
+  if(count == 1){
+    console.log("Inside If");
+    btnPrev.disabled = true;
+  }
+  else {
+    count--;
+    btnNext.disabled = false;
+    var toggle = document.getElementsByClassName("panel");
+    console.log(count);
+    toggle[count].style.display = 'none';
+    toggle[count-1].style.display = 'block';
+    // count--;
+  }
 
+}
 </script>
 </html>
