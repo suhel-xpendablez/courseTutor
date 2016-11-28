@@ -1,0 +1,74 @@
+/*
+@model
+*/
+
+var models = {
+ model :
+       [
+       {  id:1,
+       secName:'Section1',
+       subTopic:[
+       {
+       id : 11,
+       subTopicName : 'Section1.1',
+       subTopicCotent : 'Its a content of Section1.1'
+       },
+       {
+       id : 12,
+       subTopicName : 'Section1.2',
+       subTopicCotent : 'Its a content of Section1.2'
+       },
+       {
+       id : 13,
+       subTopicName : 'Section1.3',
+       subTopicCotent : 'Its a content of Section1.3'
+       }
+       ]
+       },
+       {  id:2,
+       secName:'Section2',
+       subTopic:[
+       {
+       id : 21,
+       subTopicName : 'Section2.1',
+       subTopicCotent : 'Its a content of Section2.1'
+       },
+       {
+       id : 22,
+       subTopicName : 'Section2.2',
+       subTopicCotent : 'Its a content of Section2.2'
+       },
+       {
+       id : 23,
+       subTopicName : 'Section2.3',
+       subTopicCotent : 'Its a content of Section2.3'
+       },
+       
+       ]
+       },
+       { id:3,
+       secName:'Section3',
+       subTopic:[
+       {
+       id : 31,
+       subTopicName : 'Section3.1',
+       subTopicCotent : 'Its a content of Section3.1'
+       },
+       {
+       id : 32,
+       subTopicName : 'Section3.2',
+       subTopicCotent : 'Its a content of Section3.2'
+       },
+       {
+       id : 33,
+       subTopicName : 'Section3.3',
+       subTopicCotent : 'Its a content of Section3.3'
+       },
+     ]
+     },
+
+     ],
+     currentI : 0,
+     subTopicValue : 1,
+     count : 0
+};
